@@ -4,52 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flipper Zero Firmware Installer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9; /* Couleur de fond claire */
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            color: #333;
         }
-        h1 {
+        header {
+            background-color: #000; /* Couleur de l'en-tête en noir */
+            color: #f39c12; /* Jaune abricot pour le texte */
+            padding: 20px;
             text-align: center;
-            color: #007bff;
         }
         .container {
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 900px;
+            margin: 20px auto;
             background: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        .header-image {
-            display: block;
-            max-width: 100%;
-            height: auto;
-            margin: 0 auto 20px;
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: #f39c12; /* Jaune abricot pour les sous-titres */
+            margin-top: 20px;
+            font-size: 1.8em;
+        }
+        p {
+            line-height: 1.6;
+            font-size: 1.1em;
         }
         .button {
-            display: block;
-            width: 100%;
-            padding: 10px;
+            display: inline-block;
+            padding: 12px 25px;
             margin: 10px 0;
-            background-color: #007bff;
-            color: white;
+            background-color: #f39c12; /* Jaune abricot pour les boutons */
+            color: black; /* Texte noir pour les boutons */
             border: none;
             border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
             text-decoration: none;
+            font-size: 1em;
             transition: background-color 0.3s;
         }
         .button:hover {
-            background-color: #0056b3;
+            background-color: #e67e22; /* Couleur au survol d'un jaune plus foncé */
         }
         input[type="file"] {
             margin: 10px 0;
             width: 100%;
+            padding: 10px;
         }
         .image-gallery {
             display: flex;
@@ -68,83 +77,103 @@
         .image-gallery img:hover {
             transform: scale(1.05);
         }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #000; /* Couleur du pied de page en noir */
+            color: #f39c12; /* Jaune abricot pour le texte */
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Installer le Firmware Flipper Zero</h1>
-        <img src="https://via.placeholder.com/600x200?text=Flipper+Zero" alt="Flipper Zero" class="header-image">
-        <p>Connectez votre Flipper Zero à votre ordinateur et choisissez l'une des options ci-dessous pour installer ou mettre à jour le firmware.</p>
+
+<header>
+    <h1>Flipper Zero Firmware Installer</h1>
+    <p>Installez facilement le firmware pour votre Flipper Zero</p>
+</header>
+
+<div class="container">
+    <h2>Options d'installation</h2>
+    <p>Connectez votre Flipper Zero à votre ordinateur et choisissez l'une des options ci-dessous :</p>
+    <a href="https://github.com/flipperdevices/flipperzero-firmware/releases/latest/download/flipperzero-firmware.zip" class="button">Télécharger le Firmware</a>
+    <button class="button" onclick="installFirmware()">Installer via USB</button>
+    <button class="button" onclick="updateFirmware()">Mettre à jour depuis le site</button>
+
+    <h2>Installer un Fichier .fap</h2>
+    <input type="file" id="fapFile" accept=".fap">
+    <button class="button" onclick="installFap()">Installer le fichier .fap</button>
+
+    <h2>Générer un Fichier .fap</h2>
+    <button class="button" onclick="generateFap()">Générer un fichier .fap</button>
+
+    <h2>Galerie d'Images</h2>
+    <div class="image-gallery" id="imageGallery"></div>
+</div>
+
+<footer>
+    <p>&copy; 2023 Flipper Zero Community</p>
+    <p><a href="https://flipperzero.one" style="color: #f39c12;">Visitez notre site officiel</a></p>
+</footer>
+
+<script>
+    function installFirmware() {
+        alert("Installation du firmware via USB en cours...");
+    }
+
+    function updateFirmware() {
+        alert("Mise à jour du firmware depuis le site en cours...");
+    }
+
+    function installFap() {
+        const fileInput = document.getElementById('fapFile');
+        const file = fileInput.files[0];
+        if (file) {
+            alert(`Installation du fichier ${file.name} en cours...`);
+        } else {
+            alert("Veuillez sélectionner un fichier .fap à installer.");
+        }
+    }
+
+    function generateFap() {
+        // Simulation de la génération d'un fichier .fap
+        const fapFileName = "generated_file.fap";
+        const blob = new Blob([`// Contenu du fichier .fap généré`], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
         
-        <h2>Options d'installation</h2>
-        <a href="https://example.com/firmware.zip" class="button">Télécharger le Firmware</a>
-        <p>Ou, pour l'installation via USB, utilisez le bouton ci-dessous après avoir connecté votre Flipper Zero.</p>
-        <button class="button" onclick="installFirmware()">Installer via USB</button>
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fapFileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        alert(`Fichier ${fapFileName} généré avec succès !`);
+    }
 
-        <h2>Mise à jour du Firmware</h2>
-        <p>Pour mettre à jour le firmware directement depuis le site, cliquez sur le bouton ci-dessous :</p>
-        <button class="button" onclick="updateFirmware()">Mettre à jour depuis le site</button>
+    // Charger les images dans la galerie
+    const images = [
+        "https://via.placeholder.com/150?text=Flipper+Image+1",
+        "https://via.placeholder.com/150?text=Flipper+Image+2",
+        "https://via.placeholder.com/150?text=Flipper+Image+3",
+        "https://via.placeholder.com/150?text=Flipper+Image+4"
+    ];
 
-        <h2>Installer un Fichier .fap</h2>
-        <p>Sélectionnez un fichier .fap à installer sur votre Flipper Zero :</p>
-        <input type="file" id="fapFile" accept=".fap">
-        <button class="button" onclick="installFap()">Installer le fichier .fap</button>
+    function loadImages() {
+        const gallery = document.getElementById('imageGallery');
+        images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = "Image de Flipper Zero";
+            gallery.appendChild(img);
+        });
+    }
 
-        <h2>Générer un Fichier .fap</h2>
-        <p>Utilisez le bouton ci-dessous pour générer un nouveau fichier .fap :</p>
-        <button class="button" onclick="generateFap()">Générer un fichier .fap</button>
-
-        <h2>Galerie d'Images</h2>
-        <div class="image-gallery" id="imageGallery"></div>
-    </div>
-
-    <script>
-        function installFirmware() {
-            alert("Installation du firmware via USB en cours...");
-            // Ajoutez ici le code pour gérer l'installation via USB
-        }
-
-        function updateFirmware() {
-            alert("Mise à jour du firmware depuis le site en cours...");
-            // Ajoutez ici le code pour gérer la mise à jour depuis le site
-        }
-
-        function installFap() {
-            const fileInput = document.getElementById('fapFile');
-            const file = fileInput.files[0];
-            if (file) {
-                alert(`Installation du fichier ${file.name} en cours...`);
-                // Ajoutez ici le code pour gérer l'installation du fichier .fap
-            } else {
-                alert("Veuillez sélectionner un fichier .fap à installer.");
-            }
-        }
-
-        function generateFap() {
-            alert("Génération du fichier .fap en cours...");
-            // Ajoutez ici le code pour générer un fichier .fap
-        }
-
-        // Fonction pour charger automatiquement les images dans la galerie
-        const images = [
-            "https://via.placeholder.com/150?text=Flipper+Image+1",
-            "https://via.placeholder.com/150?text=Flipper+Image+2",
-            "https://via.placeholder.com/150?text=Flipper+Image+3",
-            "https://via.placeholder.com/150?text=Flipper+Image+4"
-        ];
-
-        function loadImages() {
-            const gallery = document.getElementById('imageGallery');
-            images.forEach(src => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.alt = "Image de Flipper Zero";
-                gallery.appendChild(img);
-            });
-        }
-
-        // Charger les images lors du chargement de la page
-        window.onload = loadImages;
-    </script>
+    window.onload = loadImages;
+</script>
 </body>
 </html>
