@@ -100,7 +100,7 @@
     <h2>Options d'installation</h2>
     <p>Connectez votre Flipper Zero à votre ordinateur et choisissez l'une des options ci-dessous :</p>
     <a href="https://github.com/RogueMaster/flipperzero-firmware-wPlugins/releases/download/RM1208-2257-0.420.0-f117b40/RM1208-2257-0.420.0-f117b40.tgz" class="button">Télécharger le Firmware Rogue Master</a>
-    <a href="https://lab.flipper.net/">Installer via USB</button>
+    <a href="https://lab.flipper.net/" class="button">Installer via USB</a>
     <button class="button" onclick="updateFirmware()">Mettre à jour depuis le site</button>
 
     <h2>Installer un Fichier .fap</h2>
@@ -139,7 +139,6 @@
     }
 
     function generateFap() {
-        // Simulation de la génération d'un fichier .fap
         const fapFileName = "generated_file.fap";
         const blob = new Blob([`// Contenu du fichier .fap généré`], { type: 'text/plain' });
         const url = URL.createObjectURL(blob);
